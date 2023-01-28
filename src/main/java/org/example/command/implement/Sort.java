@@ -1,20 +1,20 @@
 package org.example.command.implement;
 
 import org.example.Compare;
+import org.example.command.MergeSort;
 import org.example.model.DataType;
 import org.example.model.TypeSort;
 import org.example.command.Command;
-import org.example.command.Sort;
 import org.example.model.FileInMemory;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SortAscending implements Command {
+public class Sort implements Command {
     private final List<FileInMemory> map = new ArrayList<>();
     private final TypeSort typeSort;
     private final DataType dataType;
 
-    public SortAscending(DataType dataType, TypeSort typeSort){
+    public Sort(DataType dataType, TypeSort typeSort){
         this.typeSort = typeSort;
         this.dataType = dataType;
     }
@@ -23,7 +23,7 @@ public class SortAscending implements Command {
     public <T> void execute(List<FileInMemory> files) {
         String fileOut = files.get(0).file.getPath();
         List<T> list = new ArrayList<>();
-        Sort sort = new Sort(typeSort, dataType);
+        MergeSort sort = new MergeSort(typeSort, dataType);
 
         for (int i = 1; i < files.size(); i++){
             String line = files.get(i).getLine();
@@ -34,9 +34,11 @@ public class SortAscending implements Command {
             list.add((T) line);
             map.add(files.get(i));
         }
+
         sort.mergeSort(list);
         T previosMinItem = list.get(0);
         boolean fileIsDamage = false;
+
         while (true) {
             T minNum = list.get(0);
 

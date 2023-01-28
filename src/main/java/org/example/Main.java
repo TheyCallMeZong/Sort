@@ -1,7 +1,7 @@
 package org.example;
 
 import org.example.command.Command;
-import org.example.command.implement.SortAscending;
+import org.example.command.implement.Sort;
 import org.example.model.DataType;
 import org.example.model.FileInMemory;
 import org.example.model.TypeSort;
@@ -50,7 +50,7 @@ public class Main {
 
         if (!setFiles(command, len)) return;
 
-        Command c = new SortAscending(dataType, parameter);
+        Command c = new Sort(dataType, parameter);
         c.execute(files);
     }
 
@@ -93,6 +93,7 @@ public class Main {
         Optional<String> file = Arrays.stream(line.split(" "))
                 .filter(x -> x.endsWith(".txt"))
                 .findFirst();
+
         if (file.isEmpty()){
             throw new FileNotFoundException("Enter the out file");
         }

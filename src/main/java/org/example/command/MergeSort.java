@@ -6,11 +6,11 @@ import org.example.model.TypeSort;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Sort {
+public class MergeSort {
     private final DataType dataType;
     private final TypeSort typeSort;
 
-    public Sort(TypeSort typeSort, DataType dataType) {
+    public MergeSort(TypeSort typeSort, DataType dataType) {
         this.typeSort = typeSort;
         this.dataType = dataType;
     }
