@@ -35,4 +35,4 @@
 <h1>Запуск проекта</h1>
 1. Клонирование репозитория на рабочий стол. Команда: git clone https://github.com/TheyCallMeZong/Sort.git
 <br/>
-2. Выполнение jar файла командой: java -jar Sort/out/artifacts/SHIFT_jar/SHIFT.jar -i/-s -a/-d (выходной файл) (файлы)
+2. Выполнение jar файла командой: java -jar Sort/out/artifacts/SHIFT_jar/SHIFT.jar -a/-d -i/-s (выходной файл) (файлы)
