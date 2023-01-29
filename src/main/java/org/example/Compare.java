@@ -20,7 +20,6 @@ public final class Compare {
                 switch (dataType){
                     case INTEGER ->
                             result = Integer.parseInt(String.valueOf(i1)) < Integer.parseInt(String.valueOf(i2));
-
                     case STRING ->
                             result = String.valueOf(i1).compareTo(String.valueOf(i2)) < 0;
                 }

@@ -27,31 +27,38 @@ public class Sort implements Command {
 
         for (int i = 1; i < files.size(); i++){
             String line = files.get(i).getLine();
-            if (line.contains(" ") || line.length() == 0){
-                System.out.println("The file is damaged");
-                return;
+            if (line != null) {
+                if (line.contains(" ") || line.length() == 0) {
+                    System.out.println("The file is damaged");
+                    return;
+                }
+                list.add((T) line);
+                map.add(files.get(i));
+            } else {
+                System.out.println("File " + files.get(i).file.getName() + " contains only string datatype");
             }
-            list.add((T) line);
-            map.add(files.get(i));
         }
-
+        if (list.size() == 0){
+            System.out.println("Files do not contain numbers");
+            return;
+        }
         sort.mergeSort(list);
         T previosMinItem = list.get(0);
         boolean fileIsDamage = false;
 
         while (true) {
             T minNum = list.get(0);
-
-            if (Compare.compare(previosMinItem, minNum, dataType, typeSort)) {
-                System.out.println("The file is damaged");
-                fileIsDamage = true;
-            } else {
-                previosMinItem = list.get(0);
-            }
             FileInMemory file = map.stream()
                     .filter(x -> x.number.equals(String.valueOf(minNum)))
                     .findFirst()
                     .get();
+
+            if (Compare.compare(previosMinItem, minNum, dataType, typeSort)) {
+                System.out.println("The file " + file.file.getName() + " is damaged");
+                fileIsDamage = true;
+            } else {
+                previosMinItem = list.get(0);
+            }
 
             if (!fileIsDamage) {
                 file.writeToFile(fileOut);

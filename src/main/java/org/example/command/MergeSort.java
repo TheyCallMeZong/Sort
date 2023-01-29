@@ -45,15 +45,14 @@ public class MergeSort {
         int rightLen = right.size();
         int tempInd = 0;
 
-        while (i < leftLen && j < rightLen){
-            if (Compare.compare(left.get(i), right.get(j), dataType, typeSort)){
+        while (i < leftLen && j < rightLen) {
+            if (Compare.compare(left.get(i), right.get(j), dataType, typeSort)) {
                 arr.set(tempInd, right.get(j));
                 j++;
-            } else{
+            } else {
                 arr.set(tempInd, left.get(i));
                 i++;
             }
-
             tempInd++;
         }
 

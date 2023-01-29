@@ -58,7 +58,7 @@ public class Main {
         for (int i = len; i < command.length; i++){
             File file = new File(command[i]);
             if (file.exists()){
-                FileInMemory fileInMemory = new FileInMemory(file);
+                FileInMemory fileInMemory = new FileInMemory(file, dataType);
                 files.add(fileInMemory);
             }
             else{
