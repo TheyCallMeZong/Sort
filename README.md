@@ -37,7 +37,7 @@
 <br/>
 2. Выполнение jar файла командой: <pre>java -jar Sort/out/artifacts/SHIFT_jar/SHIFT.jar -a/-d -i/-s (выходной файл) (файлы)</pre>
 
-<h2>Стек</h2>
+<h1>Стек</h1>
 Версия java - 18.0.2
 <br/>
 Система сборик - Maven 4.0.0
