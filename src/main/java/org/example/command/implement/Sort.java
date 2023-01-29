@@ -35,7 +35,7 @@ public class Sort implements Command {
                 list.add((T) line);
                 map.add(files.get(i));
             } else {
-                System.out.println("File " + files.get(i).file.getName() + " contains only string datatype");
+                System.out.println("File " + files.get(i).file.getName() + " contains string datatype");
             }
         }
         if (list.size() == 0){
