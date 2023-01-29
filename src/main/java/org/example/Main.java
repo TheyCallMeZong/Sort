@@ -5,6 +5,8 @@ import org.example.command.implement.Sort;
 import org.example.model.DataType;
 import org.example.model.FileInMemory;
 import org.example.model.TypeSort;
+
+import javax.naming.PartialResultException;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -17,19 +19,14 @@ public class Main {
     private static String fileOut;
 
     public static void main(String[] args) {
-        start();
+        start(args);
     }
 
-    public static void start(){
-        Scanner in = new Scanner(System.in);
-        System.out.println("Enter the file name separated by a space");
-        String line = in.nextLine();
-        String[] command = line.split(" ");
-        in.close();
+    public static void start(String[] args){
         int len;
         try {
-            len = getParameters(line);
-            if ((len + 1) == command.length){
+            len = getParameters(args);
+            if ((len + 1) == args.length){
                 System.err.println("Specify input files");
                 return;
             }
@@ -48,7 +45,7 @@ public class Main {
             return;
         }
 
-        if (!setFiles(command, len)) return;
+        if (!setFiles(args, len)) return;
 
         Command c = new Sort(dataType, parameter);
         c.execute(files);
@@ -70,27 +67,28 @@ public class Main {
         return true;
     }
 
-    private static int getParameters(String line) throws FileNotFoundException, NoSuchElementException {
+    private static int getParameters(String[] args) throws FileNotFoundException, NoSuchElementException {
         int len = 0;
-        if (line.contains(" -d ") || line.contains("-d ")){
+        var arr = Arrays.asList(args);
+        if (arr.contains("-d")){
             parameter = TypeSort.DESCENDING;
             len++;
-        } else if (line.contains(" -a ") || line.contains("-a ")){
+        } else if (arr.contains("-a")){
             parameter = TypeSort.ASCENDING;
             len++;
         }
 
-        if (line.contains(" -i ") || line.contains("-i ")){
+        if (arr.contains("-i")){
             dataType = DataType.INTEGER;
             len++;
-        } else if (line.contains(" -s ") || line.contains("-s ")){
+        } else if (arr.contains("-s")){
             dataType = DataType.STRING;
             len++;
         } else {
             throw new NoSuchElementException("Enter the data type!");
         }
 
-        Optional<String> file = Arrays.stream(line.split(" "))
+        Optional<String> file = arr.stream()
                 .filter(x -> x.endsWith(".txt"))
                 .findFirst();
 
